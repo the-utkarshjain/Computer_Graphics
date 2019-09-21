@@ -231,9 +231,19 @@ bool App::handleEvent(const Window::Event& ev) {
 		// YOUR CODE HERE (R1)
 		// React to user input and move the model.
 		if (ev.key == FW_KEY_PAGE_UP)
-			current_translation_object += 0.2;
+			current_translation_z += 0.2;
 		else if (ev.key == FW_KEY_PAGE_DOWN)
-			current_translation_object -= 0.2;
+			current_translation_z -= 0.2;
+
+		if (ev.key == FW_KEY_UP)
+			current_translation_y += 0.2;
+		else if (ev.key == FW_KEY_DOWN)
+			current_translation_y -= 0.2;
+
+		if (ev.key == FW_KEY_RIGHT)
+			current_translation_x += 0.2;
+		else if (ev.key == FW_KEY_LEFT)
+			current_translation_x -= 0.2;
 		// Look in framework/gui/Keys.hpp for more key codes.
 		// Visual Studio tip: you can right-click an identifier like FW_KEY_HOME
 		// and "Go to definition" to jump directly to where the identifier is defined.
@@ -403,7 +413,7 @@ void App::render() {
 	modelToWorld.setCol(0, Vec4f(1, 0, 0, 0));
 	modelToWorld.setCol(1, Vec4f(0, 1, 0, 0));
 	modelToWorld.setCol(2, Vec4f(0, 0, 1, 0));
-	modelToWorld.setCol(3, Vec4f(0, 0, current_translation_object, 1));
+	modelToWorld.setCol(3, Vec4f(current_translation_x, current_translation_y, current_translation_z, 1));
 
 	// Draw the model with your model-to-world transformation.
 	glUniformMatrix4fv(gl_.model_to_world_uniform, 1, GL_FALSE, modelToWorld.getPtr());
