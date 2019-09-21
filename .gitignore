@@ -1,32 +1,15 @@
-# Prerequisites
-*.d
+# Visual Studio Intellisense
+*.sdf
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Visual Studio solution user options
+*.suo
 
-# Precompiled Headers
-*.gch
-*.pch
+# Visual Studio user specific stuff
+*.user
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# Visual Studio temp file (only when VS open)
+*.opensdf
 
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+# directories
+bin/
+build/
