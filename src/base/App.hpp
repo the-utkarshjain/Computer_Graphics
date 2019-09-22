@@ -64,7 +64,13 @@ private:
 
 	// YOUR CODE HERE (R1)
 	// Add a class member to store the current translation.
-	float				current_translation_object = 0;
+	float				current_translation_z = 0; //Use Page_up and Page_down
+	float				current_translation_y = 0; //Use left and right arrow keys
+	float				current_translation_x = 0; //Use up and Down Arrow Keys
+
+	float				rotate_object_y = 0; // Use ctrl and alt
+
+	float				scale_object_x = 1;  // Use - and + keys
 	// EXTRA:
 	// For animation extra credit you can use the framework's Timer class.
 	// The .start() and .unstart() methods start and stop the timer; when it's

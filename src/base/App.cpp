@@ -230,10 +230,19 @@ bool App::handleEvent(const Window::Event& ev) {
 	if (ev.type == Window::EventType_KeyDown) {
 		// YOUR CODE HERE (R1)
 		// React to user input and move the model.
-		if (ev.key == FW_KEY_PAGE_UP)
-			current_translation_z += 0.2;
-		else if (ev.key == FW_KEY_PAGE_DOWN)
-			current_translation_z -= 0.2;
+		// Look in framework/gui/Keys.hpp for more key codes.
+		// Visual Studio tip: you can right-click an identifier like FW_KEY_HOME
+		// and "Go to definition" to jump directly to where the identifier is defined.
+
+		if (ev.key == FW_KEY_CONTROL)
+			rotate_object_y += 0.2;
+		else if (ev.key == FW_KEY_ALT)
+			rotate_object_y -= 0.2;
+
+		if (ev.key == FW_KEY_PLUS)
+			scale_object_x += 0.2;
+		else if (ev.key == FW_KEY_MINUS)
+			scale_object_x -= 0.2;
 
 		if (ev.key == FW_KEY_UP)
 			current_translation_y += 0.2;
@@ -244,9 +253,12 @@ bool App::handleEvent(const Window::Event& ev) {
 			current_translation_x += 0.2;
 		else if (ev.key == FW_KEY_LEFT)
 			current_translation_x -= 0.2;
-		// Look in framework/gui/Keys.hpp for more key codes.
-		// Visual Studio tip: you can right-click an identifier like FW_KEY_HOME
-		// and "Go to definition" to jump directly to where the identifier is defined.
+		
+		if (ev.key == FW_KEY_PAGE_UP)
+			current_translation_z += 0.2;
+		else if (ev.key == FW_KEY_PAGE_DOWN)
+			current_translation_z -= 0.2;
+
 		if (ev.key == FW_KEY_HOME)
 			camera_rotation_angle_ -= 0.05 * FW_PI;
 		else if (ev.key == FW_KEY_END)
@@ -410,9 +422,10 @@ void App::render() {
 	// YOUR CODE HERE (R1)
 	// Set the model space -> world space transform to translate the model according to user input.
 	Mat4f modelToWorld;
-	modelToWorld.setCol(0, Vec4f(1, 0, 0, 0));
-	modelToWorld.setCol(1, Vec4f(0, 1, 0, 0));
-	modelToWorld.setCol(2, Vec4f(0, 0, 1, 0));
+	
+	modelToWorld.setCol(0, Vec4f(scale_object_x, 0, -scale_object_x * FW::sin(rotate_object_y), 0));
+	modelToWorld.setCol(1, Vec4f(0, scale_object_x, 0, 0));
+	modelToWorld.setCol(2, Vec4f(scale_object_x * FW::sin(rotate_object_y), 0, scale_object_x * FW::cos(rotate_object_y), 0));
 	modelToWorld.setCol(3, Vec4f(current_translation_x, current_translation_y, current_translation_z, 1));
 
 	// Draw the model with your model-to-world transformation.
